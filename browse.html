@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#10263b">
+<meta name="description" content="Daily temperature and wind snapshots from cities and airports.">
+<title>Browse | Weather Tracker</title>
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icon-192.png">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<link rel="stylesheet" href="./style.css">
+<script src="./app.js" defer></script>
+</head>
+<body data-page="browse">
+<header><nav aria-label="Main navigation"><a class="brand" href="./">Weather Tracker</a><div><a href="./index.html">Today</a><a href="./browse.html" aria-current="page">Browse</a><a href="./trends.html">Trends</a></div></nav></header>
+<main><div class="intro"><h1>Find and shortlist locations</h1><p id="status" role="status">Loading weather data…</p></div><section><div class='controls' id='filters'></div><p id='result-count' aria-live='polite'></p><div id='table'></div></section></main>
+<footer>Weather Tracker · UTC snapshots · <a href="https://github.com/natepatterson05-sketch/weather-tracker">Source and methods</a></footer>
+</body>
+</html>
