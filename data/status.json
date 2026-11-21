@@ -1,0 +1,21 @@
+{
+  "run_time": "2026-11-21T23:03:41.044770Z",
+  "first_run_date": "2026-11-21",
+  "days_with_success": 1,
+  "items": 10,
+  "new_today": 10,
+  "gone_today": 0,
+  "sources": [
+    {
+      "name": "open-meteo",
+      "ok": true,
+      "count": 4
+    },
+    {
+      "name": "noaa-metar",
+      "ok": true,
+      "count": 6
+    }
+  ],
+  "previous_run_date": null
+}

@@ -1,0 +1,11 @@
+date,item_id,item,source,category,temperature_c,wind_kmh
+2026-11-21,airport:KDFW,Dallas/Fort Worth,noaa-metar,Airport observation,21.1,20.37
+2026-11-21,airport:KJFK,New York JFK,noaa-metar,Airport observation,11.7,7.41
+2026-11-21,airport:KLAX,Los Angeles International,noaa-metar,Airport observation,18.9,11.11
+2026-11-21,airport:KMCI,Kansas City International,noaa-metar,Airport observation,18.9,14.82
+2026-11-21,airport:KORD,Chicago O’Hare,noaa-metar,Airport observation,17.2,12.96
+2026-11-21,airport:KSEA,Seattle–Tacoma,noaa-metar,Airport observation,6.7,11.11
+2026-11-21,city:berlin,Berlin,open-meteo,City estimate,5.5,15.1
+2026-11-21,city:london,London,open-meteo,City estimate,7.1,12.2
+2026-11-21,city:madrid,Madrid,open-meteo,City estimate,10.8,4.7
+2026-11-21,city:paris,Paris,open-meteo,City estimate,8.7,10.1
