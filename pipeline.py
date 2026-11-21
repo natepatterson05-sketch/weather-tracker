@@ -84,7 +84,7 @@ def raw_path(folder, source):
 
 def fetch(url):
     with urlopen(Request(url, headers={"User-Agent": USER_AGENT}), timeout=35) as response:
-        return response.read() or (b"[]" if response.status == 204 else b"")
+        return response.read()
 
 
 def write_bytes(path, content):
@@ -157,7 +157,7 @@ def publish(day, body):
         return subprocess.run(["gh", *args], input=input_text, text=True, encoding="utf-8",
                               capture_output=True, check=True).stdout
 
-    pages = json.loads(gh("api", "--paginate", "--slurp", "repos/{owner}/{repo}/issues?state=open&per_page=100"))
+    pages = json.loads(gh("api", "--paginate", "--slurp", "repos/{owner}/{repo}/issues?state=all&per_page=100"))
     issues = [item for page in pages for item in page if ISSUE_MARKER in (item.get("body") or "")
               and "pull_request" not in item]
     same_day = next((item for item in issues if item["title"] == day), None)
@@ -166,7 +166,7 @@ def publish(day, body):
     else:
         gh("issue", "create", "--title", day, "--body-file", "-", input_text=body)
     for item in issues:
-        if item["title"] < day:
+        if item["state"] == "open" and item["title"] < day:
             gh("issue", "close", str(item["number"]))
 
 
