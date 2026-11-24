@@ -1,15 +1,15 @@
 {
-  "run_time": "2026-11-22T21:07:53.792683Z",
+  "run_time": "2026-11-24T02:01:29.496017Z",
   "first_run_date": "2026-11-21",
-  "days_with_success": 2,
-  "items": 10,
+  "days_with_success": 3,
+  "items": 6,
   "new_today": 0,
-  "gone_today": 0,
+  "gone_today": 4,
   "sources": [
     {
       "name": "open-meteo",
-      "ok": true,
-      "count": 4
+      "ok": false,
+      "count": 0
     },
     {
       "name": "noaa-metar",
@@ -17,5 +17,5 @@
       "count": 6
     }
   ],
-  "previous_run_date": "2026-11-21"
+  "previous_run_date": "2026-11-22"
 }
