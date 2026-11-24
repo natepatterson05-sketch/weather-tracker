@@ -1,7 +1,8 @@
 name: Daily collection
 on:
   schedule:
-    - cron: '23 15 * * *'
+    - cron: '23 7,15 * * *'
+    - cron: '47 21 * * *'
   workflow_dispatch:
 concurrency:
   group: weather-production
@@ -25,13 +26,28 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Check whether today's snapshot is committed
+        id: snapshot
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          today=$(date -u +%F)
+          if [[ "$EVENT_NAME" == schedule ]] && python -c 'import json, sys; sys.exit(0 if json.load(open("data/status.json"))["run_time"].startswith(sys.argv[1]) else 1)' "$today"; then
+            echo "collect=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "collect=true" >> "$GITHUB_OUTPUT"
+          fi
       - run: python -m pip install -r requirements-dev.txt
+        if: steps.snapshot.outputs.collect == 'true'
       - run: python -m pytest
+        if: steps.snapshot.outputs.collect == 'true'
       - name: Collect and report
+        if: steps.snapshot.outputs.collect == 'true'
         run: python pipeline.py run --issue
         env:
           GH_TOKEN: ${{ github.token }}
       - name: Commit snapshot
+        if: steps.snapshot.outputs.collect == 'true'
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'

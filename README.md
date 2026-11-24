@@ -4,7 +4,7 @@
 
 [Open Weather Tracker](https://natepatterson05-sketch.github.io/weather-tracker/) · [Daily issues](https://github.com/natepatterson05-sketch/weather-tracker/issues)
 
-The tracker archives one snapshot of temperature and wind per UTC day. GitHub Actions starts collection daily at **15:23 UTC**. Use the browser’s Install app option when available. After the service worker finishes setup, the installed app and browser pages can open offline using cached data.
+The tracker archives one snapshot of temperature and wind per UTC day. GitHub Actions has daily collection windows at **07:23, 15:23, and 21:47 UTC**. Later scheduled runs skip collection if a snapshot for that UTC date is already committed. A manual run refreshes the current UTC day. Use the browser’s Install app option when available. After the service worker finishes setup, the installed app and browser pages can open offline using cached data.
 
 ## Sources
 
