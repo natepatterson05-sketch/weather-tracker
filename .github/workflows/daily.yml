@@ -4,6 +4,11 @@ on:
     - cron: '23 7,15 * * *'
     - cron: '47 21 * * *'
   workflow_dispatch:
+    inputs:
+      publish_only:
+        description: Publish the committed snapshot without collecting again
+        type: boolean
+        default: false
 concurrency:
   group: weather-production
   cancel-in-progress: false
@@ -18,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url || steps.deployment_retry.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -31,9 +36,12 @@ jobs:
         id: snapshot
         env:
           EVENT_NAME: ${{ github.event_name }}
+          PUBLISH_ONLY: ${{ inputs.publish_only }}
         run: |
           today=$(date -u +%F)
-          if [[ "$EVENT_NAME" == schedule ]] && python -c 'import json, sys; sys.exit(0 if json.load(open("data/status.json"))["run_time"].startswith(sys.argv[1]) else 1)' "$today"; then
+          if [[ "$PUBLISH_ONLY" == true ]]; then
+            echo "collect=false" >> "$GITHUB_OUTPUT"
+          elif [[ "$EVENT_NAME" == schedule ]] && python -c 'import json, sys; sys.exit(0 if json.load(open("data/status.json"))["run_time"].startswith(sys.argv[1]) else 1)' "$today"; then
             echo "collect=false" >> "$GITHUB_OUTPUT"
           else
             echo "collect=true" >> "$GITHUB_OUTPUT"
@@ -72,6 +80,7 @@ jobs:
         run: |
           for attempt in {1..12}; do
             if gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/artifacts?name=$ARTIFACT_NAME" --jq '.total_count' | grep -qx 1; then
+              sleep 20
               exit 0
             fi
             sleep 5
@@ -80,5 +89,15 @@ jobs:
           exit 1
       - uses: actions/deploy-pages@v4
         id: deployment
+        continue-on-error: true
+        with:
+          artifact_name: github-pages-${{ github.run_attempt }}
+
+      - name: Wait before retrying Pages deployment
+        if: steps.deployment.outcome == 'failure'
+        run: sleep 20
+      - uses: actions/deploy-pages@v4
+        id: deployment_retry
+        if: steps.deployment.outcome == 'failure'
         with:
           artifact_name: github-pages-${{ github.run_attempt }}
