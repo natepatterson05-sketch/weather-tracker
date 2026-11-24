@@ -25,3 +25,7 @@ date,item_id,item,source,category,temperature_c,wind_kmh
 2026-11-24,airport:KMCI,Kansas City International,noaa-metar,Airport observation,0.0,20.37
 2026-11-24,airport:KORD,Chicago O’Hare,noaa-metar,Airport observation,1.1,14.82
 2026-11-24,airport:KSEA,Seattle–Tacoma,noaa-metar,Airport observation,9.4,24.08
+2026-11-24,city:berlin,Berlin,open-meteo,City estimate,0.9,13.0
+2026-11-24,city:london,London,open-meteo,City estimate,2.8,8.6
+2026-11-24,city:madrid,Madrid,open-meteo,City estimate,3.9,2.2
+2026-11-24,city:paris,Paris,open-meteo,City estimate,3.1,6.1
