@@ -59,3 +59,13 @@ date,item_id,item,source,category,temperature_c,wind_kmh
 2026-11-27,city:london,London,open-meteo,City estimate,1.8,11.9
 2026-11-27,city:madrid,Madrid,open-meteo,City estimate,2.5,1.5
 2026-11-27,city:paris,Paris,open-meteo,City estimate,0.7,5.9
+2026-11-28,airport:KDFW,Dallas/Fort Worth,noaa-metar,Airport observation,14.4,14.82
+2026-11-28,airport:KJFK,New York JFK,noaa-metar,Airport observation,8.9,37.04
+2026-11-28,airport:KLAX,Los Angeles International,noaa-metar,Airport observation,21.1,14.82
+2026-11-28,airport:KMCI,Kansas City International,noaa-metar,Airport observation,6.7,9.26
+2026-11-28,airport:KORD,Chicago O’Hare,noaa-metar,Airport observation,7.2,12.96
+2026-11-28,airport:KSEA,Seattle–Tacoma,noaa-metar,Airport observation,8.9,0.0
+2026-11-28,city:berlin,Berlin,open-meteo,City estimate,0.4,7.6
+2026-11-28,city:london,London,open-meteo,City estimate,5.4,9.4
+2026-11-28,city:madrid,Madrid,open-meteo,City estimate,6.0,1.5
+2026-11-28,city:paris,Paris,open-meteo,City estimate,0.1,11.0
